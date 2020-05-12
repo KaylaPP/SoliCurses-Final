@@ -62,7 +62,6 @@ GameBoard::GameBoard(void)
     gamewin = false;
     score = 0;
     starttime = time(nullptr);
-
 }
 
 GameBoard::~GameBoard(void)
