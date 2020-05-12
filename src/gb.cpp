@@ -1,4 +1,5 @@
 #include <curses.h>
+#include <cstdlib>
 #include "../include/consts.h"
 #include "../include/gb.h"
 

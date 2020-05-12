@@ -1,9 +1,9 @@
 #include "../include/cursor.h"
 #include "../include/direction.h"
 
-DynamicCursor::DynamicCursor(std::vector<int> maxes)
+DynamicCursor::DynamicCursor(std::vector<size_t> maxes)
 {
-    for(int i = 0; i < maxes.size(); i++)
+    for(size_t i = 0; i < maxes.size(); i++)
     {
         cursors.push_back({ 0, maxes.at(i) });
     }
@@ -11,7 +11,7 @@ DynamicCursor::DynamicCursor(std::vector<int> maxes)
 
 void DynamicCursor::move(direction d)
 {
-    int * p = &cursors.at(select).pos;
+    size_t * p = &cursors.at(select).pos;
     switch(d)
     {
     case direction::up:
