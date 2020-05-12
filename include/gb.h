@@ -16,7 +16,7 @@ public:
     ~GameBoard(void);
 
 private:
-    enum class selecting
+    enum class select
     {
         card, // If selecting card/pile of cards
         dest  // If selecting destination for card/pile of cards
@@ -27,9 +27,10 @@ private:
     card ** deck;
     card * hiddencard;
     DynamicCursor * c;
-    int score;
+    int score, srcind, destind;
+    pile src, dest;
     time_t starttime;
-    selecting state;
+    select state;
     std::vector<card *> * gb;
 
 public:
@@ -39,7 +40,7 @@ public:
     void input(int inp);
 
 private:
-    bool canmove(pile p1, pile p2, int ind1, int ind2);
+    bool canmove(pile src, pile dest, int srcind, int destind);
     card * lastRevealed(pile p);
     size_t totalRevealed(pile p);
     void print(void);

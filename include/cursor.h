@@ -8,16 +8,18 @@ class DynamicCursor
 {
 public:
     DynamicCursor(std::vector<size_t> maxes);
+    size_t getPos(void);
+    size_t getSelect(void);
     void move(direction d);
 
 private:
     struct cursor 
     {
-        size_t pos;
-        size_t max;
+        int pos;
+        int max;
     };
     std::vector<cursor> cursors;
-    size_t select;
+    int select;
 
 };
 

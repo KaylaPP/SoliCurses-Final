@@ -12,6 +12,7 @@ static void startcurses(void);
 GameBoard::GameBoard(void)
 {
     startcurses();
+
     c = new DynamicCursor({5, 7});
     deck = new card * [52];
     gb = new std::vector<card *>[12];
@@ -57,11 +58,16 @@ GameBoard::GameBoard(void)
         gb[(int) pile::DS].push_back(deck[count++]);
     }
 
+    dest = pile::DS;
+    destind = -1;
     gamestart = true;
     gamestop = false;
     gamewin = false;
     score = 0;
+    src = pile::DS;
+    srcind = -1;
     starttime = time(nullptr);
+    state = select::card;
 }
 
 GameBoard::~GameBoard(void)
@@ -102,6 +108,15 @@ void GameBoard::input(int inp)
 
     // Select card for movement then select location for movement
     case ' ':
+        if(state == select::card)
+        {
+            state = select::dest;
+            src = (pile) (c->getPos() + (5 * c->getSelect()));
+        }
+        else // if selecting destination 
+        {
+
+        }
         break;
 
     case KEY_UP:
@@ -336,7 +351,7 @@ static void startcurses(void)
         printw("Your terminal doesn't support changing of color attributes!\nIf you continue, the game may look weird. Is this fine? (y/N) ");
         refresh();
         int isfine;
-        scanw("%c", &isfine);
+        scanw((char *) "%i", &isfine);
         if(isfine != 'y' && isfine != 'Y')
         {
             endwin();

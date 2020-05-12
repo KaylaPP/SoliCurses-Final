@@ -5,13 +5,17 @@ DynamicCursor::DynamicCursor(std::vector<size_t> maxes)
 {
     for(size_t i = 0; i < maxes.size(); i++)
     {
-        cursors.push_back({ 0, maxes.at(i) });
+        cursors.push_back({ 0, (int) maxes.at(i) });
     }
 }
 
+size_t DynamicCursor::getPos(void) { return cursors.at(select).pos; }
+
+size_t DynamicCursor::getSelect(void) { return select; }
+
 void DynamicCursor::move(direction d)
 {
-    size_t * p = &cursors.at(select).pos;
+    int * p = &cursors.at(select).pos;
     switch(d)
     {
     case direction::up:

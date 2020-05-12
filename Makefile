@@ -1,5 +1,5 @@
 CXX=g++
-CFLAGS=-c -g -pthread -pedantic -std=gnu++11 -Wall
+CFLAGS=-c -g -pthread -pedantic -std=c++17 -Wall
 LDFLAGS=-lncurses
 EXECUTABLE=./SoliCurses-C.out
 SRCDIR=./src
