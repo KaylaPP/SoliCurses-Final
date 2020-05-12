@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CARD_H
+#define CARD_H
 
 #include <cstdbool>
 #include "color.h"
@@ -27,3 +28,5 @@ public:
     suit getSuit(void);
     value getValue(void);
 };
+
+#endif

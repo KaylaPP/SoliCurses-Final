@@ -1,10 +1,10 @@
-#include <curses.h>
 #include <clocale>
 #include <cstdbool>
 #include <cstdlib>
 #include <ctime>
+#include <curses.h>
 #include <iostream>
-#include "../include/board.h"
+#include "../include/piles.h"
 #include "../include/card.h"
 #include "../include/consts.h"
 #include "../include/cursor.h"
@@ -14,6 +14,8 @@
 
 int main(int argv, char * argc[])
 {
+    setlocale(LC_ALL, "en_US.UTF-8");
+
     int input = 0;
     GameBoard * board = new GameBoard();
 

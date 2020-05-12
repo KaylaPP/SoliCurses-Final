@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VALUES_H
+#define VALUES_H
 
 typedef enum
 {
@@ -16,3 +17,5 @@ typedef enum
     Queen,
     King
 } value; // Number value of a card from Ace to King
+
+#endif

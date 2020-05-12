@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CURSOR_H
+#define CURSOR_H
 
 #include "direction.h"
 
@@ -18,18 +19,4 @@ public:
     void move(direction dir);
 };
 
-/*
-typedef struct 
-{
-    int y;
-    int x;
-    int ymax;
-    int xmax;
-} Cursor;
-
-// Initialize cursor
-void Cursor_init(Cursor * c, int ym, int xm);
-
-// Move cursor in a specific direction
-void Cursor_move(Cursor * c, direction d);
-*/
+#endif

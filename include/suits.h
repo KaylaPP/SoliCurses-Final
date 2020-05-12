@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SUITS_H
+#define SUITS_H
 
 enum suit
 {
@@ -7,3 +8,5 @@ enum suit
     Club,
     Heart
 }; // Suit of a card
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PILE_H
+#define PILE_H
 
 enum pile
 {
@@ -15,3 +16,5 @@ enum pile
     T6,
     T7
 };
+
+#endif

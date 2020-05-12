@@ -6,8 +6,6 @@
 // Cyan is being redefined to gray in startcurses() so this macro is made to preserve readability
 #define COLOR_GRAY COLOR_CYAN
 
-static void donothing(void) { return; }
-
 // Activates all attributes for the terminal using curses
 static void startcurses(void);
 
@@ -29,7 +27,7 @@ GameBoard::GameBoard(void)
     }
     
     // Shuffle cards in deck
-    srand(time(NULL));
+    srand(time(nullptr));
     for(count = 0; count < 52; count++)
     {
         int r1 = rand() % 52;
@@ -57,7 +55,7 @@ GameBoard::GameBoard(void)
         gb[DS].push_back(deck[count++]);
     }
 
-    starttime = time(NULL);
+    starttime = time(nullptr);
     gamestart = true;
     gamestop = false;
     gamewin = false;
@@ -74,7 +72,7 @@ GameBoard::~GameBoard(void)
 
 time_t GameBoard::elapsed(void)
 {
-    return time(NULL) - starttime;
+    return time(nullptr) - starttime;
 }
 
 void GameBoard::input(int inp)
@@ -165,7 +163,7 @@ card * GameBoard::lastRevealed(pile p)
 {
     if(gb[p].size() > 0)
         return gb[p].back();
-    return NULL;
+    return nullptr;
 }
 
 uint32_t GameBoard::totalRevealed(pile p)
@@ -196,7 +194,7 @@ void GameBoard::printBackground(void)
 
 void GameBoard::printCard(int y, int x, card * c)
 {
-    if(c == NULL)
+    if(c == nullptr)
     {
         printEmptyCard(y, x);
         return;
@@ -230,13 +228,9 @@ void GameBoard::printCard(int y, int x, card * c)
     attron(COLOR_PAIR(color + 5));
 
     // Print card suit symbol
-#ifdef _MSVC_TRADITIONAL
-    mvaddwstr(y, x, suit_ch[c->getSuit()]);
-    mvaddwstr(y + card_height - 1, x + card_width - 1, suit_ch[c->getSuit()]);
-#else
     mvprintw(y, x, "%s", suit_ch[c->getSuit()]);
     mvprintw(y + card_height - 1, x + card_width - 1, "%s", suit_ch[c->getSuit()]);
-#endif
+
     // Print card value
     if(c->getValue() == Ace)
     {
