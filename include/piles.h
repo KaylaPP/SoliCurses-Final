@@ -1,7 +1,7 @@
 #ifndef PILE_H
 #define PILE_H
 
-enum pile
+enum class pile
 {
     DS, // Discard
     F1, // Fn -> Foundation number n

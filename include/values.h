@@ -1,7 +1,7 @@
 #ifndef VALUES_H
 #define VALUES_H
 
-typedef enum
+enum class value
 {
     Ace,
     Two,
@@ -16,6 +16,6 @@ typedef enum
     Jack,
     Queen,
     King
-} value; // Number value of a card from Ace to King
+}; // Number value of a card from Ace to King
 
 #endif

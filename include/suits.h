@@ -1,7 +1,7 @@
 #ifndef SUITS_H
 #define SUITS_H
 
-enum suit
+enum class suit
 {
     Spade,
     Diamond,

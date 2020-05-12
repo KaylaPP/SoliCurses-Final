@@ -1,43 +1,37 @@
 #include "../include/cursor.h"
 #include "../include/direction.h"
 
-cursor::cursor(int ym, int xm)
+DynamicCursor::DynamicCursor(std::vector<int> maxes)
 {
-    y = 0;
-    x = 0;
-    ymax = ym;
-    xmax = xm;
+    for(int i = 0; i < maxes.size(); i++)
+    {
+        cursors.push_back({ 0, maxes.at(i) });
+    }
 }
 
-int cursor::ypos(void) { return y; }
-
-int cursor::xpos(void) { return x; }
-
-void cursor::move(direction dir)
+void DynamicCursor::move(direction d)
 {
-    switch(dir)
+    int * p = &cursors.at(select).pos;
+    switch(d)
     {
-    default:
+    case direction::up:
+        select--;
+        if(select < 0)
+            select = cursors.size() - 1;
         break;
-    case up:
-        y--;
-        if(y < 0)
-            y = 0;
+    case direction::down:
+        select++;
+        if(select >= cursors.size())
+            select = 0;
+    case direction::left:
+        p[0]--;
+        if(*p < 0)
+            *p = cursors.size() - 1;
         break;
-    case down:
-        y++;
-        if(y > ymax)
-            y = ymax;
+    case direction::right:
+        p[0]++;
+        if(*p >= cursors.size())
+            *p = 0;
         break;
-    case left:
-        x--;
-        if(x < 0)
-            x = 0;
-        break;
-    case right:
-        x++;
-        if(x > xmax)
-            x = xmax;
-        break;
-    }
+    };
 }

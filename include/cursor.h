@@ -1,22 +1,24 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 
+#include <vector>
 #include "direction.h"
 
-// Cursors with a range of [0, xmax] or [0, ymax] [inclusive]
-
-class cursor 
+class DynamicCursor
 {
-private:
-    int y;
-    int x;
-    int ymax;
-    int xmax;
 public:
-    cursor(int ym, int xm);
-    int ypos(void);
-    int xpos(void);
-    void move(direction dir);
+    DynamicCursor(std::vector<int> maxes);
+    void move(direction d);
+
+private:
+    struct cursor 
+    {
+        int pos;
+        int max;
+    };
+    std::vector<cursor> cursors;
+    int select;
+
 };
 
 #endif
