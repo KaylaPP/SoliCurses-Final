@@ -1,5 +1,4 @@
 #include <clocale>
-#include <cstdbool>
 #include <cstdlib>
 #include <ctime>
 #include <curses.h>

@@ -1,7 +1,6 @@
 #ifndef GB_H
 #define GB_H
 
-#include <cstdbool>
 #include <ctime>
 #include <vector>
 #include "piles.h"

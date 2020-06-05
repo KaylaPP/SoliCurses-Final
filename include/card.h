@@ -1,7 +1,6 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <cstdbool>
 #include "color.h"
 #include "suits.h"
 #include "values.h"
