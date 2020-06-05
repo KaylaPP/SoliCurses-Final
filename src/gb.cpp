@@ -348,28 +348,29 @@ static void startcurses(void)
     // Check if colors can change
     if(can_change_color() == FALSE)
     {
-        printw("Your terminal doesn't support changing of color attributes!\nIf you continue, the game may look weird. Is this fine? (y/N) ");
+        printw("Your terminal doesn't support changing of color attributes!\nIf you continue, the game will render gray as cyan and\nother colors as darker than intended.\nPress ENTER to continue. . . ");
         refresh();
-        int isfine;
-        scanw((char *) "%i", &isfine);
-        if(isfine != 'y' && isfine != 'Y')
-        {
-            endwin();
-            exit(1);
-        }
+        scanw("");
+    }
+    else
+    {
+        init_color(COLOR_BLUE, 0, 0, 800);
+        init_color(COLOR_GRAY, 700, 700, 700);
+        init_color(COLOR_GREEN, 0, 800, 0);
+        init_color(COLOR_RED, 800, 0, 0);
+        init_color(COLOR_WHITE, 1000, 1000, 1000);
+        init_color(COLOR_YELLOW, 800, 800, 0);
     }
 
-    init_color(COLOR_GRAY, 600, 600, 600);
-
     // Initializes color pairs
-    init_pair(1, COLOR_GREEN, COLOR_GREEN); // Default green background
-    init_pair(2, COLOR_RED, COLOR_WHITE);   // Red text on white background
+    init_pair(1, COLOR_GREEN, COLOR_GREEN);  // Default green background
+    init_pair(2, COLOR_RED, COLOR_WHITE);    // Red text on white background
     init_pair(3, COLOR_BLACK, COLOR_WHITE);  // Black text on white background
-    init_pair(4, COLOR_BLUE, COLOR_BLUE); // Blue background for hidden cards
+    init_pair(4, COLOR_BLUE, COLOR_BLUE);    // Blue background for hidden cards
     init_pair(5, COLOR_RED, COLOR_YELLOW);   // Red text on yellow background
-    init_pair(6, COLOR_BLACK, COLOR_YELLOW);  // Black text on yellow background
-    init_pair(7, COLOR_RED, COLOR_GRAY);   // Red text on gray/cyan background
-    init_pair(8, COLOR_BLACK, COLOR_GRAY);  // Black text on gray/cyan background
+    init_pair(6, COLOR_BLACK, COLOR_YELLOW); // Black text on yellow background
+    init_pair(7, COLOR_RED, COLOR_GRAY);     // Red text on gray/cyan background
+    init_pair(8, COLOR_BLACK, COLOR_GRAY);   // Black text on gray/cyan background
 
 
     // Apply default color mode and apply ncurses window attributes
