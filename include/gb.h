@@ -20,8 +20,8 @@ private:
         card, // If selecting card/pile of cards
         dest  // If selecting destination for card/pile of cards
     };
+    bool gamedone;
     bool gamestart;
-    bool gamestop;
     bool gamewin;
     card ** deck;
     card * hiddencard;
@@ -33,6 +33,7 @@ private:
     std::vector<card *> * gb;
 
 public:
+    bool getDone();
     bool getWon();
     int getScore(void);
     time_t getElapsed(void);
@@ -45,11 +46,11 @@ private:
     void print(void);
     void printBackground(void);
     void printCard(int y, int x, card * c);
+    void printCursor(void);
     void printDeck(int y, int x);
     void printEmptyCard(int y, int x);
     void printHiddenCard(int y, int x);
     void refresh(void);
-
 };
 
 #endif

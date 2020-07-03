@@ -4,23 +4,23 @@
 #include <vector>
 #include "direction.h"
 
+struct cursor
+{
+    int pos;
+    int max;
+};
+
 class DynamicCursor
 {
 public:
     DynamicCursor(std::vector<size_t> maxes);
-    size_t getPos(void);
-    size_t getSelect(void);
+    int getPos(void);
+    int getSelect(void);
     void move(direction d);
 
 private:
-    struct cursor 
-    {
-        int pos;
-        int max;
-    };
     std::vector<cursor> cursors;
     int select;
-
 };
 
 #endif

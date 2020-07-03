@@ -30,7 +30,6 @@ GameBoard::GameBoard(void)
     
     // Shuffle cards in deck
     srand(time(nullptr));
-    srand(time(nullptr));
     for(count = 0; count < 52; count++)
     {
         int r1 = rand() % 52;
@@ -60,8 +59,8 @@ GameBoard::GameBoard(void)
 
     dest = pile::DS;
     destind = -1;
+    gamedone = false;
     gamestart = true;
-    gamestop = false;
     gamewin = false;
     score = 0;
     src = pile::DS;
@@ -77,6 +76,8 @@ GameBoard::~GameBoard(void)
     */
     endwin();
 }
+
+bool GameBoard::getDone() { return gamedone; }
 
 bool GameBoard::getWon() { return gamewin; }
 
@@ -99,6 +100,7 @@ void GameBoard::input(int inp)
     // Exit prompt
     case 'e':
     case 'E':
+        gamedone = true;
         break;
 
     // Draw card
@@ -115,7 +117,8 @@ void GameBoard::input(int inp)
         }
         else // if selecting destination 
         {
-
+            state = select::card;
+            
         }
         break;
 
@@ -157,12 +160,31 @@ void GameBoard::print(void)
         }
     }
 
+    printCursor();
+
     attron(COLOR_PAIR(3));
     mvprintw(0, 0, "Time elapsed: %i seconds \t\tScore: %i\t", getElapsed(), getScore());
     attron(COLOR_PAIR(1));
 }
 
-void GameBoard::refresh()
+void GameBoard::printCursor(void)
+{
+    attron(COLOR_PAIR(3));
+    //mvprintw(6 + c->getSelect(), c->getPos(), "*");
+    if(c->getSelect() == 0)
+    {
+        if(c->getPos() == 0)
+            mvprintw(6, 6, "*");
+        else
+            mvprintw(6, 26 + 10 * c->getPos(), "*");
+    }
+    else if(c->getSelect() == 1)
+    {
+        mvprintw(7, 6 + 10 * c->getPos(), "*");
+    }
+}
+
+void GameBoard::refresh(void)
 {
     // Flip last cards in tableau face up
     for(int y = (int) pile::T1; y <= (int) pile::T7; y++)

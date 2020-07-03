@@ -9,9 +9,9 @@ DynamicCursor::DynamicCursor(std::vector<size_t> maxes)
     }
 }
 
-size_t DynamicCursor::getPos(void) { return cursors.at(select).pos; }
+int DynamicCursor::getPos(void) { return cursors.at(select).pos; }
 
-size_t DynamicCursor::getSelect(void) { return select; }
+int DynamicCursor::getSelect(void) { return select; }
 
 void DynamicCursor::move(direction d)
 {
@@ -27,14 +27,15 @@ void DynamicCursor::move(direction d)
         select++;
         if(select >= cursors.size())
             select = 0;
+        break;
     case direction::left:
         p[0]--;
         if(*p < 0)
-            *p = cursors.size() - 1;
+            *p = cursors.at(select).max - 1;
         break;
     case direction::right:
         p[0]++;
-        if(*p >= cursors.size())
+        if(*p >= cursors.at(select).max)
             *p = 0;
         break;
     };

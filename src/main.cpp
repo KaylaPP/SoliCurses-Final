@@ -13,6 +13,9 @@
 
 int main(void)
 {
+    std::cout << "Resize your terminal window to [] then press ENTER" << std::endl;
+    std::cin.get();
+
     setlocale(LC_ALL, "en_US.UTF-8");
 
     int input = 0;
@@ -22,7 +25,7 @@ int main(void)
     {
         input = getch();
         board->input(input);
-    } while(input == ERR);
+    } while(!board->getDone());
 
     bool win = board->getWon();
     int score = board->getScore();
@@ -31,6 +34,7 @@ int main(void)
 
     if(win)
         std::cout << "Congratulations!" << std::endl;
+
     std::cout << "Your score was " << score << " and your elapsed time was " << elapsed << " seconds." << std::endl;
 
     return 0;
