@@ -40,9 +40,9 @@ public:
     void input(int inp);
 
 private:
+    int amountRevealed(pile p);
     bool canmove(pile src, pile dest, int srcind, int destind);
     card * lastRevealed(pile p);
-    size_t totalRevealed(pile p);
     void print(void);
     void printBackground(void);
     void printCard(int y, int x, card * c);

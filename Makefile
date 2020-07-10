@@ -1,6 +1,6 @@
 CXX=g++
 CFLAGS=-c -g -pthread -pedantic -std=c++17 -Wall
-LDFLAGS=-lncurses
+LDFLAGS=-lncursesw
 EXECUTABLE=./SoliCurses-C.out
 SRCDIR=./src
 BINDIR=./bin
@@ -18,7 +18,7 @@ $(BINDIR)/%.o : $(SRCDIR)/%.cpp
 	$(CXX) $(CFLAGS) -o $@ $<
 
 clean : 
-	rm -rf $(BINDIR)/*.o $(EXECUTABLE)
+	rm -r $(BINDIR)/*.o $(EXECUTABLE)
 
 run : all
 	$(EXECUTABLE)

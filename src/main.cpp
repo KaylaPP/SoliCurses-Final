@@ -34,7 +34,6 @@ int main(void)
 
     if(win)
         std::cout << "Congratulations!" << std::endl;
-
     std::cout << "Your score was " << score << " and your elapsed time was " << elapsed << " seconds." << std::endl;
 
     return 0;

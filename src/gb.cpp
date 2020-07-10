@@ -72,9 +72,50 @@ GameBoard::GameBoard(void)
 GameBoard::~GameBoard(void)
 {
     /*
-    TODO: Implement this function to free all pointers in GameBoard
-    */
+     * TODO: Implement this function to free all pointers in GameBoard
+     */
     endwin();
+}
+
+int GameBoard::amountRevealed(pile p)
+{
+    if(p == pile::DS)
+    {
+        return -1;
+    }
+
+    int ipile = (int)p;
+    int count = 0;
+
+    switch(p)
+    {
+    case pile::DS:
+        return -1;
+
+    case pile::F1:
+    case pile::F2:
+    case pile::F3:
+    case pile::F4:
+        if(lastRevealed(p) != nullptr)
+            count++;
+        break;
+
+    case pile::T1:
+    case pile::T2:
+    case pile::T3:
+    case pile::T4:
+    case pile::T5:
+    case pile::T6:
+    case pile::T7:
+        for(int i = 0; i < gb[ipile].size(); i++)
+        {
+            if(gb[ipile].at(i)->getRevealed())
+                count++;
+        }
+        break;
+    }
+
+    return count;
 }
 
 bool GameBoard::getDone() { return gamedone; }
@@ -170,17 +211,36 @@ void GameBoard::print(void)
 void GameBoard::printCursor(void)
 {
     attron(COLOR_PAIR(3));
-    //mvprintw(6 + c->getSelect(), c->getPos(), "*");
+    
+    // Debug begin
+    int p = -2;
     if(c->getSelect() == 0)
-    {
-        if(c->getPos() == 0)
-            mvprintw(6, 6, "*");
-        else
-            mvprintw(6, 26 + 10 * c->getPos(), "*");
-    }
+        p = c->getPos();
     else if(c->getSelect() == 1)
+        p = 5 + c->getPos();
+
+    int amount = amountRevealed((pile) p);
+
+    // Debug end
+
+    if(state == select::card)
     {
-        mvprintw(7, 6 + 10 * c->getPos(), "*");
+        if(c->getSelect() == 0)
+        {
+            if(c->getPos() == 0)
+                mvprintw(6, 6, "*%i", amount);
+            else
+                mvprintw(6, 26 + 10 * c->getPos(), "*%i", amount);
+        }
+        else if(c->getSelect() == 1)
+        {
+            mvprintw(7, 6 + 10 * c->getPos(), "*%i", amount);
+        }
+    }
+
+    else if(state == select::dest)
+    {
+
     }
 }
 
@@ -212,17 +272,6 @@ card * GameBoard::lastRevealed(pile p)
     if(gb[(int) p].size() > 0)
         return gb[(int) p].back();
     return nullptr;
-}
-
-size_t GameBoard::totalRevealed(pile p)
-{
-    size_t total = 0;
-    for(size_t i = 0; i < gb[(int) p].size(); i++)
-    {
-        if(gb[(int) p].at(i)->getRevealed())
-            total++;
-    }
-    return total;
 }
 
 void GameBoard::printBackground(void)
@@ -307,7 +356,7 @@ void GameBoard::printCard(int y, int x, card * c)
 
 void GameBoard::printDeck(int y, int x)
 {
-    if(totalRevealed(pile::DS) == 0)
+    if(amountRevealed(pile::DS) == 0)
         printHiddenCard(y, x);
     else
         printEmptyCard(y, x);
